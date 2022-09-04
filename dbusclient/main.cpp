@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<DBusClient>("local.myhost", 1, 0, "DBusClient"); // for QML
+    qmlRegisterType<DBusClient>("local.myhost", 1, 0, "DBusClient"); // for QtQuick
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

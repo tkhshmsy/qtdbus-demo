@@ -10,12 +10,12 @@ class DBusServer : public QObject
     Q_CLASSINFO("D-Bus Service", "local.myhost")
     Q_CLASSINFO("D-Bus Path", "/QtDBusDemo/DBusServer")
     Q_CLASSINFO("D-Bus Interface", "api.dbusserver")
-    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged) // export for both(QML and D-Bus)
+    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged) // export for both(QtQuick and D-Bus)
 public:
     explicit DBusServer(QObject *parent = nullptr);
     ~DBusServer();
 
-    int count() const; // export for QML, but NOT for D-Bus
+    int count() const; // export for QtQuick, but NOT for D-Bus
     Q_INVOKABLE void reset(); // export for both
 
 public Q_SLOTS:
