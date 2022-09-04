@@ -1,16 +1,16 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "demoserver.h"
+#include "dbusclient.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<DemoServer>("local.myhost", 1, 0, "DemoServer"); // for QML
+    qmlRegisterType<DBusClient>("local.myhost", 1, 0, "DBusClient"); // for QML
 
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/qtdbus-demo/main.qml"_qs);
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

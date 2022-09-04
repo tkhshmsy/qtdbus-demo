@@ -1,7 +1,7 @@
-#include "demoserver.h"
+#include "dbusserver.h"
 #include <QDebug>
 
-class DemoServer::Private
+class DBusServer::Private
 {
 public:
     // if running on systemBus, needs configuration in /etc/dbus-1/system.conf
@@ -9,26 +9,33 @@ public:
     int count = 0;
 };
 
-DemoServer::DemoServer(QObject *parent)
+DBusServer::DBusServer(QObject *parent)
     : QObject{parent}
     , d{new Private}
 {
-    d->bus.registerService("local.myhost");    // from D-Bus Service
-    d->bus.registerObject("/Demo/Service",     // from D-Bus Path
-                          "service.interface", // from D-Bus Interface
+    d->bus.registerService("local.myhost");         // from D-Bus Service
+    d->bus.registerObject("/QtDBusDemo/DBusServer", // from D-Bus Path
+                          "api.dbusserver",         // from D-Bus Interface
                           this,
                           QDBusConnection::ExportAllContents);
 }
 
-int DemoServer::count() const
+DBusServer::~DBusServer()
+{
+    delete d;
+}
+
+int DBusServer::count() const
 {
     qDebug() << __func__; // for debug
+
     return d->count;
 }
 
-void DemoServer::setCount(int newCount)
+void DBusServer::setCount(int newCount)
 {
-    qDebug() << __func__; // for debug
+    qDebug() << __func__ << newCount; // for debug
+
     if (d->count == newCount) {
         return;
     }
@@ -36,8 +43,9 @@ void DemoServer::setCount(int newCount)
     emit countChanged(newCount);
 }
 
-void DemoServer::reset()
+void DBusServer::reset()
 {
     qDebug() << __func__; // for debug
+
     setCount(0);
 }

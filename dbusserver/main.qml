@@ -1,5 +1,6 @@
-import QtQuick
+import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Window 2.15
 import local.myhost 1.0 // from main.cpp
 
 Window {
@@ -7,9 +8,9 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("QtDBus-demo")
+    title: qsTr("DBusServer")
 
-    DemoServer {
+    DBusServer {
         id: server
     }
 

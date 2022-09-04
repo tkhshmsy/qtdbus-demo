@@ -1,18 +1,19 @@
-#ifndef DEMOSERVER_H
-#define DEMOSERVER_H
+#ifndef DBUSSERVER_H
+#define DBUSSERVER_H
 
 #include <QObject>
 #include <QDBusConnection>
 
-class DemoServer : public QObject
+class DBusServer : public QObject
 {
     Q_OBJECT
     Q_CLASSINFO("D-Bus Service", "local.myhost")
-    Q_CLASSINFO("D-Bus Path", "/Demo/Service")
-    Q_CLASSINFO("D-Bus Interface", "service.interface")
+    Q_CLASSINFO("D-Bus Path", "/QtDBusDemo/DBusServer")
+    Q_CLASSINFO("D-Bus Interface", "api.dbusserver")
     Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged) // export for both(QML and D-Bus)
 public:
-    explicit DemoServer(QObject *parent = nullptr);
+    explicit DBusServer(QObject *parent = nullptr);
+    ~DBusServer();
 
     int count() const; // export for QML, but NOT for D-Bus
     Q_INVOKABLE void reset(); // export for both
@@ -28,4 +29,4 @@ private:
     Private *d;
 };
 
-#endif // DEMOSERVER_H
+#endif // DBUSSERVER_H
