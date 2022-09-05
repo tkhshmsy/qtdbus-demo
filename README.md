@@ -1,4 +1,4 @@
-# QtDbus-Demo
+# QtDBus-Demo
 
 the sample code for QtDBus, just introduction of simple usage.
 this code supports both of Qt5 and Q6
@@ -62,7 +62,7 @@ For export as method, use Q_INVOKABLE.
 Even if using Q_PROPERTY, read-method will not export without Q_INVOKABLE.
 ```cpp
 public:
-    Q_INVOKABLE void reset(); // export fot D-Bus
+    Q_INVOKABLE void reset(); // export for D-Bus
     int count() const; // NOT export for D-Bus without Q_INVOKABLE
 ```
 
