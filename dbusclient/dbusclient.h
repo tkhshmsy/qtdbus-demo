@@ -6,19 +6,19 @@
 class DBusClient : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)  // export for QtQuick
+    Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)  // export
 public:
     explicit DBusClient(QObject *parent = nullptr);
     ~DBusClient();
 
-    int count() const; // export for QtQuick
-    Q_INVOKABLE void reset();  // export for QtQuick
+    int count() const; // NOT export
+    Q_INVOKABLE void reset();  // export
 
 public Q_SLOTS:
-    void setCount(int newCount);  // export for QtQuick
+    void setCount(int newCount);  // export
 
 Q_SIGNALS:
-    void countChanged(int newCount);  // export for QtQuick
+    void countChanged(int newCount);  // export
 
 private:
     class Private;

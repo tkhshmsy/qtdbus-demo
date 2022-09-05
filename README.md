@@ -44,7 +44,7 @@ after running,
   * When it changes, dbuserver emits SIGNAL, and dbusclient will receive it and reaquire 'count'.
 * Using 'reset' on dbusserver, it affects as same as using dbusclient's.
 
-## Simply way to use QtDbus
+## Simply way to use QtDBus
 ### Server side
 In the class declaration,
 make informations of Service, Path and Interface with Q_CLASSINFO.
