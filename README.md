@@ -81,15 +81,32 @@ Now, ready to serve.
 ### Client side
 
 #### How to use methods over D-Bus
-make QDBusInterface, and access with call().
+make QDBusInterface, and access with invokeMethod.
 ```cpp
     QDBusInterface *iface = new QDBusInterface("local.myhost",           // from D-Bus Service
                                                 "/QtDBusDemo/DBusServer", // from D-Bus Path
                                                 "api.dbusserver",         // from D-Bus Interface
                                                 QDBusConnection::sessionBus());
+    QMetaObject::invokeMethod(iface, "reset");
+```
+if the target is property, use property()/setProperty() of QMetaObject.
+```cpp
+    // write
+    int newCount = 123;
+    iface->setProperty("count", QVariant(newCount));
+
+    // read
+    QVariant reply = iface->property("count");
+    int count = reply.toInt();
+```
+
+As an alternative, it is able to use call(),
+```cpp
+    // in the case that Q_INVOKABLE int count() const is served,
     QDBusReply<int> countReply = iface->call("count");
     int count = countReply.value();
 ```
+
 
 #### How to receive signals from D-Bus
 make QDBusConnection, and use connect() as like as the old style of QObject::connection.
